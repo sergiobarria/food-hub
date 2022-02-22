@@ -1,6 +1,27 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2017"],
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react-native",
+    "noEmit": true,
+    "isolatedModules": true,
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/screens/*": ["src/screens/"],
+      "@/components/*": ["src/components/*"],
+      "@/navigation/*": ["src/navigation/*"],
+      "@/theme/*": ["src/theme/"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "babel.config.js"]
 }
