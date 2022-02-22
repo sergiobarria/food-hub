@@ -1,15 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { useColorScheme } from 'react-native';
+
+import { ThemeProvider } from '@emotion/react';
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
+
+import MainNavigator from '@/navigation/MainNavigator';
+
+import { themeLight, themeDark } from '@/theme/';
 
 export default function App() {
+  const scheme = useColorScheme();
+  const [fontsLoaded] = useFonts({
+    'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+    'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Our react native blank canvas</Text>
-      </View>
-      <StatusBar style='auto' />
-    </>
+    <ThemeProvider theme={scheme === 'dark' ? themeDark : themeLight}>
+      <MainNavigator />
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({});
